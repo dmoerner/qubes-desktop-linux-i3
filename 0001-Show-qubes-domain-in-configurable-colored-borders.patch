@@ -1,15 +1,42 @@
-diff -ruN i3-4.16/include/atoms_rest.xmacro i3-4.16-patch/include/atoms_rest.xmacro
---- i3-4.16/include/atoms_rest.xmacro	2018-11-04 13:47:34.000000000 +0000
-+++ i3-4.16-patch/include/atoms_rest.xmacro	2018-11-17 17:38:44.473693303 +0000
+diff -ruN i3-4.16.1.orig/i3-dmenu-desktop i3-4.16.1/i3-dmenu-desktop
+--- i3-4.16.1.orig/i3-dmenu-desktop	2019-01-27 10:45:19.000000000 -0500
++++ i3-4.16.1/i3-dmenu-desktop	2019-07-20 21:53:52.679000000 -0400
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env perl
++#!/usr/bin/perl
+ # vim:ts=4:sw=4:expandtab
+ #
+ # © 2012 Michael Stapelberg
+diff -ruN i3-4.16.1.orig/i3-migrate-config-to-v4 i3-4.16.1/i3-migrate-config-to-v4
+--- i3-4.16.1.orig/i3-migrate-config-to-v4	2019-01-27 10:45:19.000000000 -0500
++++ i3-4.16.1/i3-migrate-config-to-v4	2019-07-20 21:53:52.676000000 -0400
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env perl
++#!/usr/bin/perl
+ # vim:ts=4:sw=4:expandtab
+ #
+ # script to migrate an old config file (i3 < 4.0) to the new format (>= 4.0)
+diff -ruN i3-4.16.1.orig/i3-save-tree i3-4.16.1/i3-save-tree
+--- i3-4.16.1.orig/i3-save-tree	2019-01-27 10:45:19.000000000 -0500
++++ i3-4.16.1/i3-save-tree	2019-07-20 21:53:52.677000000 -0400
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env perl
++#!/usr/bin/perl
+ # vim:ts=4:sw=4:expandtab
+ #
+ # © 2013 Michael Stapelberg
+diff -ruN i3-4.16.1.orig/include/atoms_rest.xmacro i3-4.16.1/include/atoms_rest.xmacro
+--- i3-4.16.1.orig/include/atoms_rest.xmacro	2019-01-27 10:45:19.000000000 -0500
++++ i3-4.16.1/include/atoms_rest.xmacro	2019-07-20 21:53:52.668000000 -0400
 @@ -18,3 +18,5 @@
  xmacro(_NET_FRAME_EXTENTS)
  xmacro(_MOTIF_WM_HINTS)
  xmacro(WM_CHANGE_STATE)
 +xmacro(_QUBES_VMNAME)
 +xmacro(_QUBES_LABEL)
-diff -ruN i3-4.16/include/config_directives.h i3-4.16-patch/include/config_directives.h
---- i3-4.16/include/config_directives.h	2018-11-04 13:47:34.000000000 +0000
-+++ i3-4.16-patch/include/config_directives.h	2018-11-17 17:39:46.606693303 +0000
+diff -ruN i3-4.16.1.orig/include/config_directives.h i3-4.16.1/include/config_directives.h
+--- i3-4.16.1.orig/include/config_directives.h	2019-01-27 10:45:19.000000000 -0500
++++ i3-4.16.1/include/config_directives.h	2019-07-20 21:53:52.669000000 -0400
 @@ -66,7 +66,7 @@
  CFGFUN(ipc_kill_timeout, const long timeout_ms);
  CFGFUN(restart_state, const char *path);
@@ -19,9 +46,9 @@ diff -ruN i3-4.16/include/config_directives.h i3-4.16-patch/include/config_direc
  CFGFUN(color_single, const char *colorclass, const char *color);
  CFGFUN(floating_modifier, const char *modifiers);
  CFGFUN(default_border, const char *windowtype, const char *border, const long width);
-diff -ruN i3-4.16/include/configuration.h i3-4.16-patch/include/configuration.h
---- i3-4.16/include/configuration.h	2018-11-04 13:47:34.000000000 +0000
-+++ i3-4.16-patch/include/configuration.h	2018-11-17 17:37:27.646693303 +0000
+diff -ruN i3-4.16.1.orig/include/configuration.h i3-4.16.1/include/configuration.h
+--- i3-4.16.1.orig/include/configuration.h	2019-01-27 10:45:19.000000000 -0500
++++ i3-4.16.1/include/configuration.h	2019-07-20 21:53:52.669000000 -0400
 @@ -232,7 +232,7 @@
          struct Colortriple unfocused;
          struct Colortriple urgent;
@@ -31,9 +58,9 @@ diff -ruN i3-4.16/include/configuration.h i3-4.16-patch/include/configuration.h
      struct config_bar {
          struct Colortriple focused;
          struct Colortriple unfocused;
-diff -ruN i3-4.16/include/data.h i3-4.16-patch/include/data.h
---- i3-4.16/include/data.h	2018-11-04 13:47:34.000000000 +0000
-+++ i3-4.16-patch/include/data.h	2018-11-17 17:37:27.646693303 +0000
+diff -ruN i3-4.16.1.orig/include/data.h i3-4.16.1/include/data.h
+--- i3-4.16.1.orig/include/data.h	2019-01-27 10:45:19.000000000 -0500
++++ i3-4.16.1/include/data.h	2019-07-20 21:53:52.669000000 -0400
 @@ -143,6 +143,23 @@
  } focus_wrapping_t;
  
@@ -71,9 +98,9 @@ diff -ruN i3-4.16/include/data.h i3-4.16-patch/include/data.h
      /** The WM_WINDOW_ROLE of this window (for example, the pidgin buddy window
       * sets "buddy list"). Useful to match specific windows in assignments or
       * for_window. */
-diff -ruN i3-4.16/include/window.h i3-4.16-patch/include/window.h
---- i3-4.16/include/window.h	2018-11-04 13:47:34.000000000 +0000
-+++ i3-4.16-patch/include/window.h	2018-11-17 17:37:27.646693303 +0000
+diff -ruN i3-4.16.1.orig/include/window.h i3-4.16.1/include/window.h
+--- i3-4.16.1.orig/include/window.h	2019-01-27 10:45:19.000000000 -0500
++++ i3-4.16.1/include/window.h	2019-07-20 21:53:52.669000000 -0400
 @@ -41,6 +41,20 @@
  void window_update_name_legacy(i3Window *win, xcb_get_property_reply_t *prop, bool before_mgmt);
  
@@ -95,9 +122,9 @@ diff -ruN i3-4.16/include/window.h i3-4.16-patch/include/window.h
   * Updates the CLIENT_LEADER (logical parent window).
   *
   */
-diff -ruN i3-4.16/parser-specs/config.spec i3-4.16-patch/parser-specs/config.spec
---- i3-4.16/parser-specs/config.spec	2018-11-04 13:47:34.000000000 +0000
-+++ i3-4.16-patch/parser-specs/config.spec	2018-11-17 17:37:27.647693303 +0000
+diff -ruN i3-4.16.1.orig/parser-specs/config.spec i3-4.16.1/parser-specs/config.spec
+--- i3-4.16.1.orig/parser-specs/config.spec	2019-01-27 10:45:19.000000000 -0500
++++ i3-4.16.1/parser-specs/config.spec	2019-07-20 21:53:52.670000000 -0400
 @@ -56,7 +56,7 @@
    colorclass = 'client.background'
        -> COLOR_SINGLE
@@ -135,10 +162,10 @@ diff -ruN i3-4.16/parser-specs/config.spec i3-4.16-patch/parser-specs/config.spe
  
  # <exec|exec_always> [--no-startup-id] command
  state EXEC:
-diff -ruN i3-4.16/src/commands.c i3-4.16-patch/src/commands.c
---- i3-4.16/src/commands.c	2018-11-04 13:47:34.000000000 +0000
-+++ i3-4.16-patch/src/commands.c	2018-11-17 17:40:54.884693303 +0000
-@@ -703,23 +703,7 @@
+diff -ruN i3-4.16.1.orig/src/commands.c i3-4.16.1/src/commands.c
+--- i3-4.16.1.orig/src/commands.c	2019-01-27 10:45:19.000000000 -0500
++++ i3-4.16.1/src/commands.c	2019-07-20 21:53:52.670000000 -0400
+@@ -699,23 +699,7 @@
  }
  
  static int border_width_from_style(border_style_t border_style, long border_width, Con *con) {
@@ -163,9 +190,9 @@ diff -ruN i3-4.16/src/commands.c i3-4.16-patch/src/commands.c
  }
  
  /*
-diff -ruN i3-4.16/src/config.c i3-4.16-patch/src/config.c
---- i3-4.16/src/config.c	2018-11-04 13:47:34.000000000 +0000
-+++ i3-4.16-patch/src/config.c	2018-11-17 17:37:27.654693303 +0000
+diff -ruN i3-4.16.1.orig/src/config.c i3-4.16.1/src/config.c
+--- i3-4.16.1.orig/src/config.c	2019-01-27 10:45:19.000000000 -0500
++++ i3-4.16.1/src/config.c	2019-07-20 21:53:52.670000000 -0400
 @@ -212,14 +212,100 @@
          x.child_border = draw_util_hex_to_color(cbackground);  \
      } while (0)
@@ -175,101 +202,101 @@ diff -ruN i3-4.16/src/config.c i3-4.16-patch/src/config.c
 -    INIT_COLOR(config.client.focused_inactive, "#333333", "#5f676a", "#ffffff", "#484e50");
 -    INIT_COLOR(config.client.unfocused, "#333333", "#222222", "#888888", "#292d2e");
 -    INIT_COLOR(config.client.urgent, "#2f343a", "#900000", "#ffffff", "#900000");
-+    config.client[QUBE_DOM0].background = draw_util_hex_to_color("#c4c4c4");
++    config.client[QUBE_DOM0].background = draw_util_hex_to_color("#121212");
 +    INIT_COLOR(config.client[QUBE_DOM0].focused,
-+        "#f7f7f7", "#f5f5f5", "#000000", "#0a0a0a");
++        "#522702", "#522702", "#ffffff", "#a6907d");
 +    INIT_COLOR(config.client[QUBE_DOM0].focused_inactive,
-+        "#f7f7f7", "#dcdcdc", "#191919", "#232323");
++        "#522702", "#361a01", "#ffffff", "#a6907d");
 +    INIT_COLOR(config.client[QUBE_DOM0].unfocused,
-+        "#f7f7f7", "#c4c4c4", "#323232", "#3b3b3b");
++        "#522702", "#361a01", "#999999", "#a6907d");
 +    INIT_COLOR(config.client[QUBE_DOM0].urgent,
-+        "#bd2727", "#e79e27", "#333333", "#27bdbd");
++        "#666666", "#a6907d", "#ce0000", "#a6907d");
 +
-+    config.client[QUBE_RED].background = draw_util_hex_to_color("#841b1b");
++    config.client[QUBE_RED].background = draw_util_hex_to_color("#121212");
 +    INIT_COLOR(config.client[QUBE_RED].focused,
-+        "#d06767", "#bd2727", "#ffffff", "#27bdbd");
++        "#e53b27", "#e53b27", "#ffffff", "#f19b90");
 +    INIT_COLOR(config.client[QUBE_RED].focused_inactive,
-+        "#d06767", "#971f1f", "#e5e5e5", "#1f9797");
++        "#e53b27", "#902519", "#ffffff", "#f19b90");
 +    INIT_COLOR(config.client[QUBE_RED].unfocused,
-+        "#d06767", "#841b1b", "#cccccc", "#1b8484");
++        "#e53b27", "#902519", "#999999", "#f19b90");
 +    INIT_COLOR(config.client[QUBE_RED].urgent,
-+        "#bd2727", "#e79e27", "#333333", "#27bdbd");
++        "#e53b27", "#f19b90", "#ce0000", "#f19b90");
 +
-+    config.client[QUBE_ORANGE].background = draw_util_hex_to_color("#a16e1b");
++    config.client[QUBE_ORANGE].background = draw_util_hex_to_color("#121212");
 +    INIT_COLOR(config.client[QUBE_ORANGE].focused,
-+        "#eebb67", "#e79e27", "#000000", "#2770e7");
++        "#d05f03", "#d05f03", "#ffffff", "#daa67e");
 +    INIT_COLOR(config.client[QUBE_ORANGE].focused_inactive,
-+        "#eebb67", "#b87e1f", "#191919", "#1f59b8");
++        "#d05f03", "#7b3702", "#ffffff", "#daa67e");
 +    INIT_COLOR(config.client[QUBE_ORANGE].unfocused,
-+        "#eebb67", "#a16e1b", "#323232", "#1b4ea1");
++        "#d05f03", "#7b3702", "#999999", "#daa67e");
 +    INIT_COLOR(config.client[QUBE_ORANGE].urgent,
-+        "#bd2727", "#e79e27", "#333333", "#27bdbd");
++        "#d05f03", "#daa67e", "#ce0000", "#daa67e");
 +
-+    config.client[QUBE_YELLOW].background = draw_util_hex_to_color("#a1a023");
++    config.client[QUBE_YELLOW].background = draw_util_hex_to_color("#121212");
 +    INIT_COLOR(config.client[QUBE_YELLOW].focused,
-+        "#eeec6f", "#e7e532", "#000000", "#3234e7");
++        "#999b00", "#999b00", "#ffffff", "#cacb7c");
 +    INIT_COLOR(config.client[QUBE_YELLOW].focused_inactive,
-+        "#eeec6f", "#b8b728", "#191919", "#2829b8");
++        "#999b00", "#666700", "#ffffff", "#cacb7c");
 +    INIT_COLOR(config.client[QUBE_YELLOW].unfocused,
-+        "#eeec6f", "#a1a023", "#323232", "#2324a1");
++        "#999b00", "#666700", "#999999", "#cacb7c");
 +    INIT_COLOR(config.client[QUBE_YELLOW].urgent,
-+        "#bd2727", "#e79e27", "#333333", "#27bdbd");
++        "#999b00", "#cacb7c", "#ce0000", "#cacb7c");
 +
-+    config.client[QUBE_GREEN].background = draw_util_hex_to_color("#3e972c");
++    config.client[QUBE_GREEN].background = draw_util_hex_to_color("#121212");
 +    INIT_COLOR(config.client[QUBE_GREEN].focused,
-+        "#8be379", "#5ad840", "#000000", "#be40d8");
++        "#04af5b", "#04af5b", "#ffffff", "#7dd5aa");
 +    INIT_COLOR(config.client[QUBE_GREEN].focused_inactive,
-+        "#8be379", "#48ac33", "#191919", "#9833ac");
++        "#04af5b", "#02713b", "#ffffff", "#7dd5aa");
 +    INIT_COLOR(config.client[QUBE_GREEN].unfocused,
-+        "#8be379", "#3e972c", "#323232", "#852c97");
++        "#04af5b", "#02713b", "#999999", "#7dd5aa");
 +    INIT_COLOR(config.client[QUBE_GREEN].urgent,
-+        "#bd2727", "#e79e27", "#333333", "#27bdbd");
++        "#04af5b", "#7dd5aa", "#ce0000", "#7dd5aa");
 +
-+    config.client[QUBE_GRAY].background = draw_util_hex_to_color("#636368");
++    config.client[QUBE_GRAY].background = draw_util_hex_to_color("#121212");
 +    INIT_COLOR(config.client[QUBE_GRAY].focused,
-+        "#afafb4", "#8e8e95", "#ffffff", "#95958e");
++        "#8c959f", "#8c959f", "#ffffff", "#c3c8cd");
 +    INIT_COLOR(config.client[QUBE_GRAY].focused_inactive,
-+        "#afafb4", "#717177", "#e5e5e5", "#777771");
++        "#8c959f", "#676d75", "#ffffff", "#c3c8cd");
 +    INIT_COLOR(config.client[QUBE_GRAY].unfocused,
-+        "#afafb4", "#636368", "#cccccc", "#686863");
++        "#8c959f", "#676d75", "#999999", "#c3c8cd");
 +    INIT_COLOR(config.client[QUBE_GRAY].urgent,
-+        "#bd2727", "#e79e27", "#333333", "#27bdbd");
++        "#8c959f", "#c3c8cd", "#ce0000", "#c3c8cd");
 +
-+    config.client[QUBE_BLUE].background = draw_util_hex_to_color("#275197");
++    config.client[QUBE_BLUE].background = draw_util_hex_to_color("#121212");
 +    INIT_COLOR(config.client[QUBE_BLUE].focused,
-+        "#739de3", "#3874d8", "#ffffff", "#d89c38");
++        "#3384d6", "#3384d6", "#ffffff", "#95bee8");
 +    INIT_COLOR(config.client[QUBE_BLUE].focused_inactive,
-+        "#739de3", "#2c5cac", "#e5e5e5", "#ac7c2c");
++        "#3384d6", "#1f5082", "#ffffff", "#95bee8");
 +    INIT_COLOR(config.client[QUBE_BLUE].unfocused,
-+        "#739de3", "#275197", "#cccccc", "#976d27");
++        "#3384d6", "#1f5082", "#999999", "#95bee8");
 +    INIT_COLOR(config.client[QUBE_BLUE].urgent,
-+        "#bd2727", "#e79e27", "#333333", "#27bdbd");
++        "#3384d6", "#95bee8", "#ce0000", "#95bee8");
 +
-+    config.client[QUBE_PURPLE].background = draw_util_hex_to_color("#6f276f");
++    config.client[QUBE_PURPLE].background = draw_util_hex_to_color("#121212");
 +    INIT_COLOR(config.client[QUBE_PURPLE].focused,
-+        "#bb73bb", "#9f389f", "#ffffff", "#389f38");
++        "#8f5cbe", "#8f5cbe", "#ffffff", "#c6abdd");
 +    INIT_COLOR(config.client[QUBE_PURPLE].focused_inactive,
-+        "#bb73bb", "#7f2c7f", "#e5e5e5", "#2c7f2c");
++        "#8f5cbe", "#5c3e78", "#ffffff", "#c6abdd");
 +    INIT_COLOR(config.client[QUBE_PURPLE].unfocused,
-+        "#bb73bb", "#6f276f", "#cccccc", "#276f27");
++        "#8f5cbe", "#5c3e78", "#999999", "#c6abdd");
 +    INIT_COLOR(config.client[QUBE_PURPLE].urgent,
-+        "#bd2727", "#e79e27", "#333333", "#27bdbd");
++        "#8f5cbe", "#c6abdd", "#ce0000", "#c6abdd");
 +
-+    config.client[QUBE_BLACK].background = draw_util_hex_to_color("#141414");
++    config.client[QUBE_BLACK].background = draw_util_hex_to_color("#121212");
 +    INIT_COLOR(config.client[QUBE_BLACK].focused,
-+        "#5b5b5b", "#333333", "#ffffff", "#cccccc");
++        "#595959", "#595959", "#ffffff", "#a3a3a3");
 +    INIT_COLOR(config.client[QUBE_BLACK].focused_inactive,
-+        "#5b5b5b", "#1e1e1e", "#e5e5e5", "#e1e1e1");
++        "#595959", "#3a3a3a", "#ffffff", "#a3a3a3");
 +    INIT_COLOR(config.client[QUBE_BLACK].unfocused,
-+        "#5b5b5b", "#141414", "#cccccc", "#ebebeb");
++        "#595959", "#3a3a3a", "#999999", "#a3a3a3");
 +    INIT_COLOR(config.client[QUBE_BLACK].urgent,
-+        "#bd2727", "#e79e27", "#333333", "#27bdbd");
++        "#595959", "#a3a3a3", "#ce0000", "#a3a3a3");
  
      /* border and indicator color are ignored for placeholder contents */
 -    INIT_COLOR(config.client.placeholder, "#000000", "#0c0c0c", "#ffffff", "#000000");
 +    INIT_COLOR(config.client[QUBE_DOM0].placeholder,
 +        "#000000", "#0c0c0c", "#ffffff", "#000000");
-+ 
++
  
      /* the last argument (indicator color) is ignored for bar colors */
      INIT_COLOR(config.bar.focused, "#4c7899", "#285577", "#ffffff", "#000000");
@@ -286,9 +313,9 @@ diff -ruN i3-4.16/src/config.c i3-4.16-patch/src/config.c
      if (reload) {
          translate_keysyms();
          grab_all_keys(conn);
-diff -ruN i3-4.16/src/config_directives.c i3-4.16-patch/src/config_directives.c
---- i3-4.16/src/config_directives.c	2018-11-04 13:47:34.000000000 +0000
-+++ i3-4.16-patch/src/config_directives.c	2018-11-17 17:37:27.654693303 +0000
+diff -ruN i3-4.16.1.orig/src/config_directives.c i3-4.16.1/src/config_directives.c
+--- i3-4.16.1.orig/src/config_directives.c	2019-01-27 10:45:19.000000000 -0500
++++ i3-4.16.1/src/config_directives.c	2019-07-20 21:53:52.670000000 -0400
 @@ -382,32 +382,63 @@
  
  CFGFUN(color_single, const char *colorclass, const char *color) {
@@ -353,7 +380,7 @@ diff -ruN i3-4.16/src/config_directives.c i3-4.16-patch/src/config_directives.c
 +    } else if (strcmp(qubelabel, "yellow") == 0) {
 +        label = QUBE_YELLOW;
 +    } else if (strcmp(qubelabel, "green") == 0) {
-+        label = QUBE_GREEN;                             
++        label = QUBE_GREEN;
 +    } else if (strcmp(qubelabel, "gray") == 0) {
 +        label = QUBE_GRAY;
 +    } else if (strcmp(qubelabel, "blue") == 0) {
@@ -371,13 +398,13 @@ diff -ruN i3-4.16/src/config_directives.c i3-4.16-patch/src/config_directives.c
 +        APPLY_COLORS(focused, label);
 +        APPLY_COLORS(unfocused, label);
 +        APPLY_COLORS(urgent, label);
-+    }   
++    }
  
  #undef APPLY_COLORS
  }
-diff -ruN i3-4.16/src/manage.c i3-4.16-patch/src/manage.c
---- i3-4.16/src/manage.c	2018-11-04 13:47:34.000000000 +0000
-+++ i3-4.16-patch/src/manage.c	2018-11-17 17:37:27.655693303 +0000
+diff -ruN i3-4.16.1.orig/src/manage.c i3-4.16.1/src/manage.c
+--- i3-4.16.1.orig/src/manage.c	2019-01-27 10:45:19.000000000 -0500
++++ i3-4.16.1/src/manage.c	2019-07-20 21:53:52.671000000 -0400
 @@ -86,7 +86,7 @@
      xcb_get_window_attributes_reply_t *attr = NULL;
  
@@ -405,9 +432,9 @@ diff -ruN i3-4.16/src/manage.c i3-4.16-patch/src/manage.c
      window_update_leader(cwindow, xcb_get_property_reply(conn, leader_cookie, NULL));
      window_update_transient_for(cwindow, xcb_get_property_reply(conn, transient_cookie, NULL));
      window_update_strut_partial(cwindow, xcb_get_property_reply(conn, strut_cookie, NULL));
-diff -ruN i3-4.16/src/resize.c i3-4.16-patch/src/resize.c
---- i3-4.16/src/resize.c	2018-11-04 13:47:34.000000000 +0000
-+++ i3-4.16-patch/src/resize.c	2018-11-17 17:37:27.655693303 +0000
+diff -ruN i3-4.16.1.orig/src/resize.c i3-4.16.1/src/resize.c
+--- i3-4.16.1.orig/src/resize.c	2019-01-27 10:45:19.000000000 -0500
++++ i3-4.16.1/src/resize.c	2019-07-20 21:53:52.671000000 -0400
 @@ -202,7 +202,7 @@
      }
  
@@ -417,9 +444,9 @@ diff -ruN i3-4.16/src/resize.c i3-4.16-patch/src/resize.c
  
      mask |= XCB_CW_OVERRIDE_REDIRECT;
      values[1] = 1;
-diff -ruN i3-4.16/src/restore_layout.c i3-4.16-patch/src/restore_layout.c
---- i3-4.16/src/restore_layout.c	2018-11-04 13:47:34.000000000 +0000
-+++ i3-4.16-patch/src/restore_layout.c	2018-11-17 17:37:27.655693303 +0000
+diff -ruN i3-4.16.1.orig/src/restore_layout.c i3-4.16.1/src/restore_layout.c
+--- i3-4.16.1.orig/src/restore_layout.c	2019-01-27 10:45:19.000000000 -0500
++++ i3-4.16.1/src/restore_layout.c	2019-07-20 21:53:52.671000000 -0400
 @@ -129,8 +129,8 @@
  }
  
@@ -440,10 +467,10 @@ diff -ruN i3-4.16/src/restore_layout.c i3-4.16-patch/src/restore_layout.c
                  XCB_EVENT_MASK_EXPOSURE | XCB_EVENT_MASK_STRUCTURE_NOTIFY,
              });
          /* Make i3 not focus this window. */
-diff -ruN i3-4.16/src/window.c i3-4.16-patch/src/window.c
---- i3-4.16/src/window.c	2018-11-04 13:47:34.000000000 +0000
-+++ i3-4.16-patch/src/window.c	2018-11-17 17:37:27.655693303 +0000
-@@ -146,6 +146,57 @@
+diff -ruN i3-4.16.1.orig/src/window.c i3-4.16.1/src/window.c
+--- i3-4.16.1.orig/src/window.c	2019-01-27 10:45:19.000000000 -0500
++++ i3-4.16.1/src/window.c	2019-07-20 22:20:58.970000000 -0400
+@@ -152,6 +152,62 @@
  }
  
  /*
@@ -459,8 +486,13 @@ diff -ruN i3-4.16/src/window.c i3-4.16-patch/src/window.c
 +    }
 +
 +    i3string_free(win->qubes_vmname);
-+    win->qubes_vmname = i3string_from_utf8_with_length(xcb_get_property_value(prop),
-+                                                       xcb_get_property_value_length(prop));
++
++    /* Truncate the name at the first zero byte. See i3 #3515. */
++    const int len = xcb_get_property_value_length(prop);
++    char *qubes_vmname = sstrndup(xcb_get_property_value(prop), len);
++    win->qubes_vmname = i3string_from_utf8(qubes_vmname);
++    free(qubes_vmname);
++
 +    LOG("_QUBES_VMNAME set to \"%s\"\n", i3string_as_utf8(win->qubes_vmname));
 +
 +    if (before_mgmt) {
@@ -501,9 +533,9 @@ diff -ruN i3-4.16/src/window.c i3-4.16-patch/src/window.c
   * Updates the CLIENT_LEADER (logical parent window).
   *
   */
-diff -ruN i3-4.16/src/x.c i3-4.16-patch/src/x.c
---- i3-4.16/src/x.c	2018-11-04 13:47:34.000000000 +0000
-+++ i3-4.16-patch/src/x.c	2018-11-17 17:42:47.950693303 +0000
+diff -ruN i3-4.16.1.orig/src/x.c i3-4.16.1/src/x.c
+--- i3-4.16.1.orig/src/x.c	2019-01-27 10:45:19.000000000 -0500
++++ i3-4.16.1/src/x.c	2019-07-20 22:36:38.557000000 -0400
 @@ -443,15 +443,25 @@
      /* 1: build deco_params and compare with cache */
      struct deco_render_params *p = scalloc(1, sizeof(struct deco_render_params));
@@ -564,43 +596,36 @@ diff -ruN i3-4.16/src/x.c i3-4.16-patch/src/x.c
                              w->x + w->width, 0, r->width - (w->x + w->width), r->height);
      }
  
-@@ -579,7 +589,6 @@
-     /* 6: draw the title */
-     int text_offset_y = (con->deco_rect.height - config.font.height) / 2;
- 
--    struct Window *win = con->window;
-     if (win == NULL) {
-         i3String *title;
-         if (con->title_format == NULL) {
-@@ -643,6 +652,7 @@
-         FREE(formatted_mark);
+@@ -619,7 +629,6 @@
      }
  
-+    /* set window title, include qubes vmname */
-     i3String *title = con->title_format == NULL ? win->name : con_parse_title_format(con);
-     if (title == NULL) {
+     i3String *title = NULL;
+-    struct Window *win = con->window;
+     if (win == NULL) {
+         if (con->title_format == NULL) {
+             char *_title;
+@@ -639,6 +648,13 @@
          goto copy_pixmaps;
-@@ -670,15 +680,19 @@
-             break;
      }
  
 +    char *title_buf;
 +    sasprintf(&title_buf, "[%s] %s", i3string_as_utf8(win->qubes_vmname), i3string_as_utf8(title));
-+    if (con->title_format != NULL)
++    if (win == NULL || con->title_format != NULL)
 +        I3STRING_FREE(title);
 +    title = i3string_from_utf8(title_buf);
 +    FREE(title_buf);
 +
-     draw_util_text(title, &(parent->frame_buffer),
-                    p->color->text, p->color->background,
-                    con->deco_rect.x + title_offset_x,
+     int title_offset_x;
+     switch (config.title_align) {
+         case ALIGN_LEFT:
+@@ -667,9 +683,7 @@
                     con->deco_rect.y + text_offset_y,
                     deco_width - mark_width - 2 * title_padding);
--
--    if (con->title_format != NULL) {
+ 
+-    if (win == NULL || con->title_format != NULL) {
 -        I3STRING_FREE(title);
 -    }
 +    I3STRING_FREE(title);
  
- after_title:
      x_draw_decoration_after_title(con, p);
+ copy_pixmaps:
