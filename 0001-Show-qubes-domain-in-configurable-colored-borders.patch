@@ -165,7 +165,7 @@ diff -ruN i3-4.17/src/commands.c i3-4.17-patch/src/commands.c
  /*
 diff -ruN i3-4.17/src/config.c i3-4.17-patch/src/config.c
 --- i3-4.17/src/config.c	2019-08-03 09:14:38.000000000 -0400
-+++ i3-4.17-patch/src/config.c	2019-08-06 13:44:31.161000000 -0400
++++ i3-4.17-patch/src/config.c	2019-08-06 14:18:42.089000000 -0400
 @@ -199,14 +199,100 @@
          x.child_border = draw_util_hex_to_color(cbackground);  \
      } while (0)
@@ -273,6 +273,19 @@ diff -ruN i3-4.17/src/config.c i3-4.17-patch/src/config.c
  
      /* the last argument (indicator color) is ignored for bar colors */
      INIT_COLOR(config.bar.focused, "#4c7899", "#285577", "#ffffff", "#000000");
+@@ -244,6 +330,12 @@
+         set_font(&config.font);
+     }
+ 
++    /* redefine defaults, to overwrite user settings easily */
++    config.default_border = BS_NORMAL;
++    config.default_floating_border = BS_NORMAL;
++    config.default_border_width = logical_px(2);
++    config.default_floating_border_width = logical_px(2);
++
+     if (load_type == C_RELOAD) {
+         translate_keysyms();
+         grab_all_keys(conn);
 diff -ruN i3-4.17/src/config_directives.c i3-4.17-patch/src/config_directives.c
 --- i3-4.17/src/config_directives.c	2019-08-03 09:14:38.000000000 -0400
 +++ i3-4.17-patch/src/config_directives.c	2019-08-06 13:44:31.161000000 -0400
