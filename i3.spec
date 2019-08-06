@@ -1,5 +1,5 @@
 Name:           i3
-Version:        4.16.1
+Version:        4.17
 Release:        1%{?dist}
 Epoch:          1000
 Summary:        Improved tiling window manager
@@ -134,6 +134,9 @@ install -Dpm0644 %{SOURCE1} \
 %doc docs/*.{html,png} pseudo-doc/doxygen/
 
 %changelog
+
+* Tue Aug 06 2019 Daniel Moerner <dmoerner@gmail.com> - 4.17-1
+- Update to upstream 4.17 and refresh Qubes patches.
 
 * Sun Jul 21 2019 Daniel Moerner <dmoerner@gmail.com> - 4.16.1-1
 - Update to upstream 4.16.1 and refresh Qubes patches.
